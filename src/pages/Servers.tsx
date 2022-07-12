@@ -12,13 +12,11 @@ import {
 
 import { SERVERS_LIST } from '../utils/servers-list';
 
-const BASE_SERVER_BANNER_PATH = process.env.PUBLIC_URL + '/static/images/';
-
 const Servers = () => {
   const serversCards = [];
 
   for (const server of SERVERS_LIST) {
-    const serverBannerPath = BASE_SERVER_BANNER_PATH + server.banner;
+    const serverBannerPath = '/static/images/' + server.banner;
 
     serversCards.push(
       <Grid key={server.id} item lg={6} xs={12}>

@@ -28,4 +28,10 @@ const replaceRouteParams = (
   return handledParts.join('/');
 };
 
-export { replaceRouteParams };
+const delay = (delayTimeMs: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delayTimeMs);
+  });
+};
+
+export { replaceRouteParams, delay };

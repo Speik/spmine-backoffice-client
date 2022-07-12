@@ -2,10 +2,11 @@ enum AppRoutes {
   Login = '/login',
   Logout = '/logout',
   Servers = '/',
+  Server = '/server/:id',
   Donates = '/donate',
   Patchnotes = '/patchnotes',
   Users = '/users',
-  Server = '/server/:id',
+  Profile = '/profile',
 }
 
 export { AppRoutes };

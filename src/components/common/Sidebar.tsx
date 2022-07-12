@@ -113,7 +113,10 @@ const Sidebar = ({ sidebarWidth }: SidebarProps) => {
       <Divider />
       <List sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
         <ListItem component="div" disablePadding>
-          <ListItemButton sx={{ height: 56 }}>
+          <ListItemButton
+            sx={{ height: 56 }}
+            component={Link}
+            to={AppRoutes.Profile}>
             <ListItemIcon>
               <AccountCircleIcon color="primary" />
             </ListItemIcon>
