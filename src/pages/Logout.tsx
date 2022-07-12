@@ -2,21 +2,14 @@ import React, { useEffect } from 'react';
 import { Box, Container, LinearProgress } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { setUserLoggedOut } from '../redux/actions/auth-actions';
 import { AppRoutes } from '../utils/routes';
 import { delay } from '../utils/helpers';
 
-type LogoutProps = {
-  isLoggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Logout = ({ isLoggedIn, setLoggedIn }: LogoutProps) => {
-  /**
-   * If already logged out - do nothing
-   */
-  if (!isLoggedIn) {
-    return <Navigate to={AppRoutes.Login} />;
-  }
+const Logout = () => {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
 
   /**
    * Otherweise send request to drop
@@ -28,9 +21,16 @@ const Logout = ({ isLoggedIn, setLoggedIn }: LogoutProps) => {
      */
     (async () => {
       await delay(1000);
-      setLoggedIn(false);
+      dispatch(setUserLoggedOut());
     })();
   });
+
+  /**
+   * If already logged out - do nothing
+   */
+  if (!isLoggedIn) {
+    return <Navigate to={AppRoutes.Login} />;
+  }
 
   return (
     <Box

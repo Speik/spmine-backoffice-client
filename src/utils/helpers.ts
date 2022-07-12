@@ -34,4 +34,6 @@ const delay = (delayTimeMs: number) => {
   });
 };
 
-export { replaceRouteParams, delay };
+const isUserLoggedIn = () => true;
+
+export { replaceRouteParams, delay, isUserLoggedIn };

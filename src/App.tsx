@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { Servers, Server, Login, Logout, Developing, NotFound } from './pages';
 
 import { appTheme } from './utils/theme';
 import { AppRoutes } from './utils/routes';
+import { useAppSelector } from './redux/hooks';
 
 const SIDEBAR_WIDTH = Number(process.env.REACT_APP_SIDEBAR_WIDTH);
 const APP_NAME = String(process.env.REACT_APP_NAME);
@@ -18,7 +19,7 @@ const APP_NAME = String(process.env.REACT_APP_NAME);
 const theme = createTheme(appTheme);
 
 const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,22 +38,12 @@ const App = () => {
           }}>
           <Toolbar />
           <Routes>
-            <Route
-              path={AppRoutes.Login}
-              element={
-                <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-              }
-            />
-            <Route
-              path={AppRoutes.Logout}
-              element={
-                <Logout isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-              }
-            />
+            <Route path={AppRoutes.Login} element={<Login />} />
+            <Route path={AppRoutes.Logout} element={<Logout />} />
             <Route
               path={AppRoutes.Servers}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Servers />
                 </PrivateRoute>
               }
@@ -60,7 +51,7 @@ const App = () => {
             <Route
               path={AppRoutes.Server}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Server />
                 </PrivateRoute>
               }
@@ -68,7 +59,7 @@ const App = () => {
             <Route
               path={AppRoutes.Patchnotes}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Developing />
                 </PrivateRoute>
               }
@@ -76,7 +67,7 @@ const App = () => {
             <Route
               path={AppRoutes.Donates}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Developing />
                 </PrivateRoute>
               }
@@ -84,7 +75,7 @@ const App = () => {
             <Route
               path={AppRoutes.Users}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Developing />
                 </PrivateRoute>
               }
@@ -92,7 +83,7 @@ const App = () => {
             <Route
               path={AppRoutes.Profile}
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <Developing />
                 </PrivateRoute>
               }
@@ -100,7 +91,7 @@ const App = () => {
             <Route
               path="*"
               element={
-                <PrivateRoute isLoggedIn={isLoggedIn}>
+                <PrivateRoute>
                   <NotFound />
                 </PrivateRoute>
               }

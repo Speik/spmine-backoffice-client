@@ -1,4 +1,6 @@
 import React, { FormEvent, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -11,16 +13,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { Navigate } from 'react-router-dom';
 
 import { OverlappingBox } from '../components/common/OverlappingBox';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { setUserLoggedIn } from '../redux/actions/auth-actions';
 import { AppRoutes } from '../utils/routes';
 import { delay } from '../utils/helpers';
-
-type LoginProps = {
-  isLoggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
 type FormFields = {
   username?: string;
@@ -37,7 +35,10 @@ const DEFAULT_VALUES: FormFields = {
 
 const LOGO_PATH = process.env.PUBLIC_URL + '/static/images/logo64.png';
 
-const Login = ({ isLoggedIn, setLoggedIn }: LoginProps) => {
+const Login = () => {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
+
   const [isPending, setPending] = useState(false);
   const [formValues, setFormValues] = useState(DEFAULT_VALUES);
 
@@ -102,7 +103,7 @@ const Login = ({ isLoggedIn, setLoggedIn }: LoginProps) => {
     /**
      * IMPLEMENT ME
      */
-    setLoggedIn(true);
+    dispatch(setUserLoggedIn());
     setPending(false);
   };
 
@@ -124,21 +125,13 @@ const Login = ({ isLoggedIn, setLoggedIn }: LoginProps) => {
           flexWrap: 'wrap',
           bgcolor: 'background.default',
         }}>
-        <Box
-          component="img"
-          src={LOGO_PATH}
-          alt="Logo"
-          sx={{
-            dispolay: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}></Box>
+        <Box component="img" src={LOGO_PATH} alt="Logo"></Box>
         <Paper
           variant="elevation"
           elevation={1}
           sx={{
             width: '100%',
-            px: '5rem',
+            px: '4rem',
             py: '2rem',
             borderRadius: '.3rem',
             mt: '2rem',
