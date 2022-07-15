@@ -14,6 +14,7 @@ import {
   IconButton,
   ListSubheader,
   Typography,
+  Skeleton,
 } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -24,12 +25,16 @@ import FormatColorTextIcon from '@mui/icons-material/FormatColorText';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import GroupIcon from '@mui/icons-material/Group';
 
+import { useAppSelector } from '../../redux/hooks';
 import { AppRoutes } from '../../utils/routes';
 import packageJson from '../../../package.json';
 
 type SidebarProps = { sidebarWidth: number };
 
 const Sidebar = ({ sidebarWidth }: SidebarProps) => {
+  const userData = useAppSelector((state) => state.auth.user);
+  const username = userData?.username;
+
   return (
     <Drawer
       sx={{
@@ -113,22 +118,33 @@ const Sidebar = ({ sidebarWidth }: SidebarProps) => {
       <Divider />
       <List sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
         <ListItem component="div" disablePadding>
-          <ListItemButton
-            sx={{ height: 56 }}
-            component={Link}
-            to={AppRoutes.Profile}>
-            <ListItemIcon>
-              <AccountCircleIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText
-              primary="USER_NAME"
-              primaryTypographyProps={{
-                color: 'primary',
-                fontWeight: 'medium',
-                variant: 'body2',
-              }}
-            />
-          </ListItemButton>
+          {userData ? (
+            <ListItemButton
+              sx={{ height: 56 }}
+              component={Link}
+              to={AppRoutes.Profile}>
+              <ListItemIcon>
+                <AccountCircleIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={username}
+                primaryTypographyProps={{
+                  color: 'primary',
+                  fontWeight: 'medium',
+                  variant: 'body2',
+                }}
+              />
+            </ListItemButton>
+          ) : (
+            <ListItemButton sx={{ height: 56 }}>
+              <ListItemIcon>
+                <Skeleton variant="circular" width={24} height={24} />
+              </ListItemIcon>
+              <ListItemText>
+                <Skeleton variant="text" width="100%" animation="wave" />
+              </ListItemText>
+            </ListItemButton>
+          )}
           <Tooltip title="Logout">
             <IconButton
               component={Link}

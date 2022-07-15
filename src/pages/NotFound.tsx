@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { OverlappingBox } from '../components/common/OverlappingBox';
+import { OverlappingBox } from '../components/layout/OverlappingBox';
 import { AppRoutes } from '../utils/routes';
 
 const NotFound = () => {

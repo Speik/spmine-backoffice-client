@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../redux/hooks';
-import { AppRoutes } from '../../utils/routes';
+import { useAppSelector } from '../redux/hooks';
+import { AppRoutes } from '../utils/routes';
 
 type PrivateRouteProps = { children: JSX.Element };
 

@@ -34,6 +34,13 @@ const delay = (delayTimeMs: number) => {
   });
 };
 
+const getRandomNumber = (from: number, to: number): number => {
+  const min = Math.ceil(from);
+  const max = Math.floor(to);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 const isUserLoggedIn = () => true;
 
-export { replaceRouteParams, delay, isUserLoggedIn };
+export { replaceRouteParams, delay, getRandomNumber, isUserLoggedIn };

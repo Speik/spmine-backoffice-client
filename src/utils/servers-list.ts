@@ -35,7 +35,8 @@ const SERVERS_LIST = [
     banner: 'classic-server.jpg',
     description: `
       Server with classic (not vanilla) gameplay. It was first server
-      developed as part of ${process.env.REACT_APP_NAME} brand.
+      developed as part of ${process.env.REACT_APP_NAME} brand. Includes
+      survival and creative worlds.
     `,
   },
 ];

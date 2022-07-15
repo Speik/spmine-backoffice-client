@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { OverlappingBox } from '../components/common/OverlappingBox';
+import { OverlappingBox } from '../components/layout/OverlappingBox';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setUserLoggedIn } from '../redux/actions/auth-actions';
 import { AppRoutes } from '../utils/routes';
@@ -26,8 +26,10 @@ type FormFields = {
   rememberMe: boolean;
 };
 
-const MIN_USERNAME_LENGTH = 3;
-const MIN_PASSWORD_LENGTH = 5;
+const MIN_USERNAME_LENGTH = Number(process.env.REACT_APP_MIN_USERNAME_LENGTH);
+const MIN_PASSWORD_LENGTH = Number(
+  process.env.REACT_APP_MIN_USER_PASSWORD_LENGTH,
+);
 
 const DEFAULT_VALUES: FormFields = {
   rememberMe: true,
@@ -196,7 +198,7 @@ const Login = () => {
                 })}
               </Box>
             )}
-            <Box sx={{ m: 1, position: 'relative' }}>
+            <Box sx={{ my: 1, position: 'relative' }}>
               <Button
                 variant="contained"
                 disabled={isPending}

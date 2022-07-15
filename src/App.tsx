@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
 
-import { Sidebar } from './components/common/Sidebar';
-import { Header } from './components/common/Header';
-import { PrivateRoute } from './components/common/PrivateRoute';
+import { Sidebar } from './components/layout/Sidebar';
+import { Header } from './components/layout/Header';
+import { PrivateRoute } from './components/PrivateRoute';
 
-import { Servers, Server, Login, Logout, Developing, NotFound } from './pages';
+import {
+  Servers,
+  Server,
+  Login,
+  Logout,
+  Developing,
+  NotFound,
+  Users,
+} from './pages';
 
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { setUser } from './redux/actions/auth-actions';
 import { appTheme } from './utils/theme';
 import { AppRoutes } from './utils/routes';
-import { useAppSelector } from './redux/hooks';
+import { fetchUser } from './services/api';
 
-const SIDEBAR_WIDTH = Number(process.env.REACT_APP_SIDEBAR_WIDTH);
+const SIDEBAR_WIDTH = 320;
 const APP_NAME = String(process.env.REACT_APP_NAME);
 
 const theme = createTheme(appTheme);
 
 const App = () => {
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
+  const { isLoggedIn, user } = useAppSelector((state) => state.auth);
+
+  /**
+   * Fetch user from backend if it logged in,
+   * but user data doesn't exists
+   */
+  useEffect(() => {
+    (async () => {
+      if (isLoggedIn && !user) {
+        const fetchedUser = await fetchUser();
+        dispatch(setUser(fetchedUser));
+      }
+    })();
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -76,7 +100,7 @@ const App = () => {
               path={AppRoutes.Users}
               element={
                 <PrivateRoute>
-                  <Developing />
+                  <Users />
                 </PrivateRoute>
               }
             />

@@ -11,12 +11,12 @@ import {
 
 interface IAuthState {
   isLoggedIn: boolean;
-  user: IUser;
+  user: IUser | null;
 }
 
 const initialState: IAuthState = {
   isLoggedIn: isUserLoggedIn(),
-  user: {},
+  user: null,
 };
 
 const AuthReducer = createReducer(initialState, (builder) => {

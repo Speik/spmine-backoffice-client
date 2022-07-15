@@ -23,7 +23,7 @@ const Logout = () => {
       await delay(1000);
       dispatch(setUserLoggedOut());
     })();
-  });
+  }, [dispatch]);
 
   /**
    * If already logged out - do nothing
