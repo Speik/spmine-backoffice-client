@@ -60,6 +60,8 @@ const UserCreate = ({ isOpen, setOpen }: UserCreateProps) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
 
+    name === 'username' ? setUsernameError(false) : setPasswordError(false);
+
     setFormValues({
       ...formValues,
       [name]: value,

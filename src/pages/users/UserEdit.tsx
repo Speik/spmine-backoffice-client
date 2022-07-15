@@ -65,6 +65,8 @@ const UserEdit = ({ user, isOpen, setOpen }: UserEditProps) => {
     const target = e.target as HTMLInputElement;
     const { name, value } = target;
 
+    name === 'username' ? setUsernameError(false) : setPasswordError(false);
+
     setFormValues({
       ...formValues,
       [name]: value,
