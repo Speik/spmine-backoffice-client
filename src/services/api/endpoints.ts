@@ -14,4 +14,6 @@ const fetchUsersList = async () => {
   return getMockUsersList(usersCount);
 };
 
+// const fetchServerStats = async () => {};
+
 export { fetchUser, fetchUsersList };

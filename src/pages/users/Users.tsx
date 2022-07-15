@@ -93,7 +93,7 @@ const Users = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Box sx={{ p: 6 }}>
       <UserCreate isOpen={isCreatingUser} setOpen={setCreatingUser} />
       {isEditingUser && (
         <UserEdit
@@ -141,7 +141,7 @@ const Users = () => {
         loading={usersList.length === 0}
         sx={{ minHeight: 456 }}
       />
-    </>
+    </Box>
   );
 };
 

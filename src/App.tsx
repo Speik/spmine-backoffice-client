@@ -23,7 +23,7 @@ import { appTheme } from './utils/theme';
 import { AppRoutes } from './utils/routes';
 import { fetchUser } from './services/api';
 
-const SIDEBAR_WIDTH = 320;
+const SIDEBAR_WIDTH = 284;
 const APP_NAME = String(process.env.REACT_APP_NAME);
 
 const theme = createTheme(appTheme);
@@ -48,7 +48,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
         {isLoggedIn && (
           <Header sidebarWidth={SIDEBAR_WIDTH} appName={APP_NAME} />
         )}
@@ -57,8 +57,7 @@ const App = () => {
           component="main"
           sx={{
             flexGrow: 1,
-            p: 6,
-            height: '100%',
+            minHeight: '100%',
           }}>
           <Toolbar />
           <Routes>
@@ -76,7 +75,7 @@ const App = () => {
               path={AppRoutes.Server}
               element={
                 <PrivateRoute>
-                  <Server />
+                  <Server sidebarWidth={SIDEBAR_WIDTH} />
                 </PrivateRoute>
               }
             />

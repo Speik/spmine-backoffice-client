@@ -59,7 +59,7 @@ const UserDelete = ({ user, isOpen, setOpen }: UserDeleteProps) => {
       <DialogContent>
         <DialogContentText>
           You are about to completely delete user{' '}
-          <strong>{user?.username}</strong>. Are you shure?
+          <strong>{user?.username}</strong>. Are you sure?
         </DialogContentText>
       </DialogContent>
       <DialogActions>

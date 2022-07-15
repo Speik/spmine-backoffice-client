@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -43,9 +44,11 @@ const Servers = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      {serversCards}
-    </Grid>
+    <Box sx={{ p: 6 }}>
+      <Grid container spacing={2}>
+        {serversCards}
+      </Grid>
+    </Box>
   );
 };
 
