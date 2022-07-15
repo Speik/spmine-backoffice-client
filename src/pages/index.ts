@@ -4,4 +4,4 @@ export { Servers } from './Servers';
 export { Server } from './Server/Server';
 export { Developing } from './Developing';
 export { NotFound } from './NotFound';
-export { Users } from './users/Users';
+export { Users } from './Users/Users';
